@@ -58,7 +58,8 @@ const brickInfo = {
   padding: 5,
   offsetX: 45,
   offsetY: 60,
-  visible: true
+  visible: true,
+  opacity: 1
 };
 
 //효과 기본값
@@ -68,10 +69,11 @@ const effectInfo = {
   offsetX: 65,
   offsetY: 73,
   padding:5,
-  visible: true
+  visible: true,
+  opacity: 1
 };
 
-const effectArray = ["", "width", "height", "ul"];
+const effectArray = ["", "width", "height", "ul","opacity","fontsize","display"];
 
 // 벽돌 만들기
 const bricks = [];
@@ -103,10 +105,12 @@ function drawText(){
     column.forEach((effect)=>{
       context.beginPath();
       context.fillStyle = effect.visible ? "#cfa5a5" : "transparent";
+      context.globalAlpha = effect.opacity;
       context.fillText(effect.text,effect.x,effect.y);
       context.closePath();
     })
   }) 
+  context.globalAlpha = 1;
 }
 
 // 캔버스에 벽돌 그리기
@@ -116,10 +120,12 @@ function drawBricks() {
       context.beginPath();
       context.rect(brick.x, brick.y, brick.w, brick.h);
       context.fillStyle = brick.visible ? "#000000" : "transparent";
+      context.globalAlpha = brick.opacity;
       context.fill();
       context.closePath();
     });
   });
+  context.globalAlpha = 1;
 }
 
 const effectManager = {
@@ -153,6 +159,11 @@ const effectManager = {
   }
 };
 effectManager.registerEffect('effect1', effect_width);
+effectManager.registerEffect('effect3', effect_ul);
+effectManager.registerEffect('effect4', effect_opacity);
+effectManager.registerEffect('effect5', effect_fontsize);
+effectManager.registerEffect('effect6', effect_display);
+
 
 //체크한 효과들 시행
 function check_effects(row,col){
@@ -163,14 +174,21 @@ function check_effects(row,col){
           effectManager.effect1();
           break;
       case 2:
-          effect_height();
+          effectManager.effect2();
           break;
       case 3:
-          effect_ul();
+          effectManager.effect3();
           break;
       case 4:
-          effect_opacity();
+          effectManager.effect4();
           break;
+      case 5:
+          effectManager.effect5();
+          break;
+      case 6:
+          effectManager.effect6();
+          break;
+      
   }
 }
 
@@ -182,6 +200,9 @@ function drawInit(){
       bricks[i][j].x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetX;
       effects[i][j].x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
       canvas.width = 800;
+      bricks[i][j].opacity= 1;
+      effects[i][j].opacity= 1;
+      ball.size= 10;
     }
   }
   draw();
@@ -204,10 +225,27 @@ function effect_height(){
   console.log(2);
 }
 function effect_ul(){
-  console.log(3);
+  for(let i = 0; i < brickRowCount; i++) {
+    for (let j = 0; j < brickColumnCount; j++) {
+      if(effects[i][j].randNum==0 && effects[i][j].visible==true){
+        effects[i][j].text="li";
+        
+      }
+    }
+  }
 }
 function effect_opacity(){
-  console.log(4);
+  for(let i = 0; i < brickRowCount; i++) {
+    for (let j = 0; j < brickColumnCount; j++) {
+      bricks[i][j].opacity=0;
+      effects[i][j].opacity=0;
+    }
+  }
+  drawText();
+  drawBricks();
+}
+function effect_fontsize(){
+  ball.size += 7;
 }
 
 

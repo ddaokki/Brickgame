@@ -159,6 +159,7 @@ const effectManager = {
   }
 };
 effectManager.registerEffect('effect1', effect_width);
+effectManager.registerEffect('effect2', effect_height);
 effectManager.registerEffect('effect3', effect_ul);
 effectManager.registerEffect('effect4', effect_opacity);
 effectManager.registerEffect('effect5', effect_fontsize);
@@ -197,9 +198,14 @@ function drawInit(){
   for(let i = 0; i < brickRowCount; i++) {
     for (let j = 0; j < brickColumnCount; j++) {
       bricks[i][j].w = 70;
+      bricks[i][j].h = 20;
       bricks[i][j].x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetX;
       effects[i][j].x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
+      bricks[i][j].y = j * (brickInfo.h + brickInfo.padding) + brickInfo.offsetY;
+      effects[i][j].y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
       canvas.width = 800;
+      canvas.height = 530;
+
       bricks[i][j].opacity= 1;
       effects[i][j].opacity= 1;
       ball.size= 10;
@@ -222,7 +228,17 @@ function effect_width(){
   drawBricks();
 }
 function effect_height(){
-  console.log(2);
+  for(let i = 0; i < brickRowCount; i++) {
+    
+    for (let j = 0; j < brickColumnCount; j++) {
+      bricks[i][j].y += 10 * j;
+      effects[i][j].y += 10 * j; 
+      bricks[i][j].h = 30;
+      canvas.height = 800;
+    }
+  }  
+  drawText();
+  drawBricks();
 }
 function effect_ul(){
   for(let i = 0; i < brickRowCount; i++) {

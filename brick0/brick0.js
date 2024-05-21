@@ -375,6 +375,16 @@ function moveBall() {
 
 // 게임오버 함수
 function gameOver() {
+  if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
+    {
+      location.replace("gameFail.html");
+    }
+    else
+    {
+      alert("도망칠수없어..");
+      location.replace("gameFail.html");
+    }
+    /*
   context.clearRect(0, 0, canvas.width, canvas.height);
   // 게임 오버 메시지를 표시
   context.font = "30px Arial";
@@ -385,7 +395,8 @@ function gameOver() {
 
   // 게임 오버 화면 표시
   document.getElementById("gameOverScreen").style.display = "block";
-  document.getElementById("finalScore").innerText = score;
+  document.getElementById("finalScore").innerText = score; 
+  */
 }
 
 // 게임 다시 시작

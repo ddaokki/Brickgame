@@ -450,7 +450,7 @@ canvas.addEventListener("mousemove", mouseMoveHandler, false);
 
 // 패들 움직임 함수
 function mouseMoveHandler(e) {
-  var relativeX = e.clientX - canvas.offsetLeft;
+  var relativeX = e.clientX - 265;
   if (relativeX > 0 && relativeX < canvas.width) {
     paddle.x = relativeX - paddle.w / 2;
   }

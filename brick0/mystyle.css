@@ -1,0 +1,368 @@
+/* mystyle.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #ededed url('https://ecampus.konkuk.ac.kr/ilos/images/index/bg_warp.gif') repeat-x 0 top;
+    padding: 0;
+}
+
+#wrap {
+    width:985px;
+    margin:0 auto;
+    padding-bottom:10px;
+    overflow:hidden;
+}
+
+#headerWrap {
+    width:985px;
+    margin:10px auto 0 auto;
+    overflow:hidden;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    z-index: 1;
+    background: url('https://ecampus.konkuk.ac.kr/ilos/images/common/header/bg_headerwrap.png') no-repeat 0 1px;
+}
+
+#browser_header_logo {
+    display:block;
+    position: absolute;
+    width: 300px;
+    padding: 13px 342px;
+    align-content: center;
+
+}
+#header .languages {
+    float:left;
+    width:290px;
+    height:20px;
+    margin-top:99px;
+    padding-left:37px;
+    overflow:hidden;
+}
+
+#header .languages select{
+    float:left;
+    width:84px;
+    font-size:95%;
+    color:#fff;
+    line-height:20px;
+    background:#4C4C4C;
+    border:1px solid #bbb;
+}
+
+#header .utillmenu {
+    float:right;
+    margin-top:99px;
+    padding-right:30px;
+    overflow:hidden;
+}
+
+#header .utillmenu ul {
+    float:left;
+    margin:0;
+    display:inline;
+    font-size:0;
+    line-height:0;
+}
+
+#header .utillmenu ul li {
+    list-style-type: none;
+    float:left;
+    margin:0;
+    padding:0;
+}
+
+#header .login {
+    float:left;
+    margin:0;
+    padding-top: 10px;
+}
+
+#header .login fieldset {
+    float:left;
+    overflow:hidden;
+}
+
+.header_login {
+    font-size: 11px;
+    color: #888;
+    border: 1px solid #BEBEBE;
+    background-color: #fff;
+    padding: 6px 8px 6px 8px !important;
+}
+
+.header_login_img {
+    margin-right: 6px;
+    width: 8px;
+    height: 8px;
+    background-image: url('https://ecampus.konkuk.ac.kr/ilos/images/default.png');
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+.header_login > div {
+    display: inline-block;
+}
+
+#gnb {
+    position:relative;
+    width:100%;
+    height:60px;
+    z-index:0;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/header/bg_gnbwrap.png') no-repeat 0 0;
+    margin: 0;
+    padding: 0;
+}
+
+#topMenu{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 180px;
+    width: 550px;
+    list-style:none;
+}
+#topMenu li{
+    float: left;
+}
+
+.topMenuBox{
+    width: 176px;
+    height: 31px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: -1px;
+    margin-left: 6px;
+    padding-bottom: 6px;
+    background-color: #b6b6b6;
+}
+.topMenuBox p{
+    margin-top: 0;
+    padding-top: 8px;
+    font-size: 15px;
+    color: #fff;
+}
+
+#containerWrap {
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/index/bg_contentwrap.png') repeat-y 0 0;
+    overflow:hidden;
+}
+
+#container {
+    position:relative;
+    width:985px;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/index/bg_content.png') no-repeat 0 top;
+    padding-bottom: 60px;
+}
+
+#container:after {
+    content:".";
+    display:block;
+    clear:both;
+    height:0;
+    overflow:hidden;
+    visibility:hidden;
+}
+
+/* subMenu */
+#lnb {
+    float:left;
+    width:153px;
+    margin:0 15px 0 17px;
+    padding-bottom:80px;
+    display:inline;
+}
+
+#lnb .leftMenu {
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/subBox_bg.gif') repeat-y top;
+}
+
+#lnb .leftMenu-admin {
+    margin-top:6px;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/subBox_bg.gif') repeat-y top;
+}
+#lnb .leftMenu h2 {
+    font-size: 18px;
+    margin: 0;
+    padding: 24px 10px 17px 10px;
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: -1px;
+    background: url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/subBox_bgt.png') no-repeat center top;
+    cursor: pointer;
+}
+#lnb .leftMenu .course-subject {
+    width:130px;
+    margin:0 auto;
+    height : auto;
+    text-align:center;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/submenu_list_bg.gif') no-repeat top;
+    color: #516c41;
+    font-size: 13px;
+    font-weight:bold;
+    padding: 5px;
+}
+
+.select-subject{
+
+    width: 120px;
+    height: 22px;
+    margin: auto;
+}
+
+.select-subject select{
+    border: 1px solid rgb(116, 116, 116);
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    font-size: 95%;
+    text-align: left;
+    cursor: pointer;
+
+    margin: auto;
+}
+
+.class-time{
+    margin: 0;
+    padding: 3px 0;
+    font-weight: normal;
+    font-size: 12px;
+    color: #413736;
+    letter-spacing: -0.1em;
+    text-align: center;
+}
+
+#lnb .leftMenu ul{
+    width: 130px;
+    margin: 0;
+    padding-left: 23px;
+    padding-right: 23px;
+    padding-top: 10px;
+    background: url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/submenu_list_bg.gif') no-repeat top;
+}
+
+#lnb .leftMenu ul li{
+    width: 110px;
+    margin: 0;
+    padding-bottom: 2px;
+    list-style: none;
+}
+#lnb .leftMenu ul li:hover{
+    background: #046B40;;
+}
+#lnb .leftMenu ul li a{
+    display:block;
+    padding:4px 0 4px 16px;
+    font-size:9pt;
+    color:#535353;
+    letter-spacing:0;
+    text-decoration:none;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/submenu_icon.gif') no-repeat 7px 10px;
+}
+#lnb .leftMenu ul li a:hover{
+    color: white;
+}
+
+#lnb .leftMenu div.bg_bot {
+    height:20px;
+    margin:0;
+    font-size:0;
+    line-height:0;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/lnb/subBox_bgb.png') no-repeat center bottom;
+}
+
+#content {
+    float:right;
+    width:738px;
+    _height:300px;
+    min-height:300px;
+    margin:20px 45px 0 0;
+    padding:0;
+    display:inline;
+}
+#content-location {
+    position:relative;
+    width:100%;
+    height:39px;
+    background:url('https://ecampus.konkuk.ac.kr/ilos/images/common/title/location_bg.gif') repeat-x left bottom;
+}
+
+#content-location .top-title {
+    color:#666;
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    overflow: hidden;
+    line-height: 25px;
+}
+
+#content-text{
+    width: 738px;
+    margin: 20px 0 90px 0;
+    position: relative;
+}
+
+table.bbslist {
+    clear: both;
+    width: 100%;
+    table-layout: auto;
+    border-bottom: 1px solid #dadada !important;
+}
+
+table.bbslist th {
+    height: 26px;
+    padding: 2px 0 0;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: normal;
+    background: #8B8B8B none;
+}
+
+table.bbslist thead th.first {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right: 1px solid #8b8b8b;
+    padding-left: 1px;
+}
+
+table.bbslist thead th.last {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left: 1px solid #8b8b8b;
+    padding-right: 1px;
+}
+
+table.bbslist td {
+    padding: 7px 0 5px 0;
+    text-align: center;
+    background: none;
+    font-size: 12px;
+    border-bottom: 1px solid #dadada !important;
+}
+
+table.new_bbslist td {
+    padding: 12px 0 !important;
+    line-height: 1.1;
+}
+
+.assignment-title{
+
+}
+tr:nth-child(even) {
+    background-color: #f7f7fb;
+}
+
+/* 홀수 행의 배경색 */
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+
+.hide{
+    display: none;
+}

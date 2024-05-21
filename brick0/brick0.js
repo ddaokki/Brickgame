@@ -53,10 +53,10 @@ const brickColumnCount = 5; // 한 열에 들어 있는 벽돌 갯수
 
 // 벽돌 기본값
 const brickInfo = {
-  w: 70,
+  w: 50,
   h: 20,
-  padding: 5,
-  offsetX: 45,
+  padding: 10,
+  offsetX: 105,
   offsetY: 60,
   visible: true,
   opacity: 1
@@ -64,11 +64,11 @@ const brickInfo = {
 
 //효과 기본값
 const effectInfo = {
-  w: 70,
+  w: 50,
   h: 20,
-  offsetX: 65,
+  offsetX: 115,
   offsetY: 73,
-  padding:5,
+  padding:10,
   visible: true,
   opacity: 1
 };
@@ -91,7 +91,7 @@ var effects = [];
 for (let i = 0; i < brickRowCount; i++) {
   effects[i] = [];  
   for (let j = 0; j < brickColumnCount; j++) {
-    var randNum = parseInt(Math.random() * 2);
+    var randNum = parseInt(Math.random() * 1);
     var text = effectArray[randNum];
     var x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
     var y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
@@ -106,6 +106,7 @@ function drawText(){
       context.beginPath();
       context.fillStyle = effect.visible ? "#cfa5a5" : "transparent";
       context.globalAlpha = effect.opacity;
+      context.font = "10px Arial";
       context.fillText(effect.text,effect.x,effect.y);
       context.closePath();
     })
@@ -197,17 +198,16 @@ function check_effects(row,col){
 function drawInit(){
   for(let i = 0; i < brickRowCount; i++) {
     for (let j = 0; j < brickColumnCount; j++) {
-      bricks[i][j].w = 70;
+      bricks[i][j].w = 50;
       bricks[i][j].h = 20;
+      bricks[i][j].opacity= 1;
+      effects[i][j].opacity= 1;
+      bricks[i][j].padding=10;
+      effects[i][j].padding=10;
       bricks[i][j].x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetX;
       effects[i][j].x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
       bricks[i][j].y = j * (brickInfo.h + brickInfo.padding) + brickInfo.offsetY;
       effects[i][j].y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
-      canvas.width = 800;
-      canvas.height = 530;
-
-      bricks[i][j].opacity= 1;
-      effects[i][j].opacity= 1;
       ball.size= 10;
     }
   }
@@ -218,10 +218,9 @@ function drawInit(){
 function effect_width(){
   for(let i = 0; i < brickRowCount; i++) {
     for (let j = 0; j < brickColumnCount; j++) {
-      bricks[i][j].w = 90;
-      bricks[i][j].x += 20 * i;
-      effects[i][j].x += 20 * i;
-      canvas.width = 1000;
+      bricks[i][j].w = 60;
+      bricks[i][j].x += 10 * i - 50;
+      effects[i][j].x += 10 * i - 50;
     }
   }
   drawText();
@@ -234,7 +233,6 @@ function effect_height(){
       bricks[i][j].y += 10 * j;
       effects[i][j].y += 10 * j; 
       bricks[i][j].h = 30;
-      canvas.height = 800;
     }
   }  
   drawText();
@@ -262,6 +260,10 @@ function effect_opacity(){
 }
 function effect_fontsize(){
   ball.size += 7;
+}
+
+function effect_display(){
+  console.log(1);
 }
 
 

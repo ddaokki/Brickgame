@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="levelChooseStyle.css" rel="stylesheet">
+  <title>Title</title>
+</head>
+<body>
+<div class="choose-level-title">
+  <h1>난이도를 선택하세요</h1>
+</div>
+<div class="container">
+  <div class="box" onclick="selectLevel(1)">
+    <div class="emoji">😊</div>
+    <div class="level">Easy</div>
+  </div>
+  <div class="box" onclick="selectLevel(2)">
+    <div class="emoji">😁</div>
+    <div class="level">Medium</div>
+  </div>
+  <div class="box" onclick="selectLevel(3)">
+    <div class="emoji">😎</div>
+    <div class="level">Hard</div>
+  </div>
+</div>
+
+<script>
+    function selectLevel(level) {
+        alert('선택한 레벨은? ' + level);
+    }
+</script>
+</body>
+</html>

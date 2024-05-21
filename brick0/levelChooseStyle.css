@@ -1,0 +1,50 @@
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color:  #e4dcd1;
+}
+.container {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 1800px;
+}
+.box {
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    position: relative;
+}
+.box:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+.level {
+    text-align: center;
+    font-size: 40px;
+    font-weight: lighter;
+    margin-top: 10px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid black;
+
+}
+.choose-level-title{
+    margin-top: 5%;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.emoji {
+    font-size: 270px; /* 이모지 크기 조절 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}

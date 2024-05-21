@@ -88,10 +88,20 @@ for (let i = 0; i < brickRowCount; i++) {
 
 //효과 만들기 
 var effects = [];
+var effectCnt = 0;
+const effectLimit = 2;
 for (let i = 0; i < brickRowCount; i++) {
-  effects[i] = [];  
+  effects[i] = []; 
+  effectCnt = 0; 
   for (let j = 0; j < brickColumnCount; j++) {
-    var randNum = parseInt(Math.random() * 1);
+    var randNum;
+    if(effectCnt < effectLimit) //이펙트 개수가 한도보다 작다면
+      randNum = parseInt(Math.random() * 5);
+    else
+      randNum = 0;
+    if(randNum != 0){
+      effectCnt++;
+    }
     var text = effectArray[randNum];
     var x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
     var y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;

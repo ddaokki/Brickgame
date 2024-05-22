@@ -148,12 +148,12 @@
                   <th scope="col" class="last">마감일</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class = "AssignmentTable">
                 </tbody>
               </table>
               <script>
                 var trTemplate = `
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" class = "AssignmentHidden">
                 <td class="AssignmentNumber">6</td>
                 <td class="center impt impt_off">
                     <img alt="중요글 추가" src="https://ecampus.konkuk.ac.kr/ilos/images/common/impt_off.png">
@@ -179,14 +179,20 @@
                   $('.bbslist').append(trTemplate);
                 }
 
-                // 각 AssignmentNumber 셀에 순차적인 숫자를 부여합니다.
+                // 각 AssignmentNumber 셀에 순차적인 숫자를 부여
                 $('.AssignmentNumber').each(function(index) {
                   $(this).text(index + 1);
                 });
 
-                // 각 subject-top 셀에 과제 번호를 부여합니다.
+                // 각 subject-top 셀에 과제 번호를 부여
                 $('.subject-top').each(function(index) {
                   $(this).text("과제" + (index + 1));
+                });
+
+
+                // 각 행을 순회하며 delay추가하고 500ms 동안 slideDown
+                $('.AssignmentHidden').each(function(index){
+                  $(this).delay((index+1)*50).slideDown(500);
                 });
               </script>
             </div>
@@ -196,6 +202,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>

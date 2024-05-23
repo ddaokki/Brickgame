@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 <head>
   <link href="mystyle.css" rel="stylesheet">
   <meta charset="UTF-8">
   <title>Title</title>
-  <script src="script.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="gameFail.js"></script>
 </head>
 <body>
+<div id="gameover-wrap">
+  <div class="gameover-popup">
+    <h3>[서울] 웹프로그래밍(003)<br><br>
+      <span style="color:green">[과제]</span> 과제 점수가 공개되었습니다. "벽돌깨기"<br><br>
+      당신의 과제는
+    </h3>
+    <div class="user-score">
+      <h1 id="score">
+
+      </h1>
+      <h3>
+        이대로는 재수강을 해야할 것 같다..다시 해봐야겠지?
+      </h3>
+      <button id="restart">다시하기</button>
+      <button id="beginning">처음으로</button>
+    </div>
+  </div>
+</div>
 <div id="wrap">
   <div id="headerWrap">
     <div id="header">
@@ -194,6 +212,8 @@
                 $('.AssignmentHidden').each(function(index){
                   $(this).delay((index+1)*50).slideDown(500);
                 });
+
+                setTimeout(showResult,2000);
               </script>
             </div>
           </div>

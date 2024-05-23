@@ -1,0 +1,31 @@
+﻿
+
+$(document).ready(function(){
+  console.log(1);
+  var settingVairable = location.href.split("?")[1];
+  var regex = /[^0-9]/g;
+  settingVairable = settingVairable.replace(regex,""); //    ڷκ     ޾ƿ  ȯ 溯       
+  const level = settingVairable[0];
+  const color = settingVairable[1];
+  const music = settingVairable[2];
+  const score = settingVairable.substr(3,settingVairable.length);
+  $('#score').text(score + "  ");
+  console.log(settingVairable.length);
+      
+  $('#restart').on("click",function(){
+      location.replace("ingame.html?level=" + level + "&color=" + color + "&music=" + music);
+  });
+  $('#beginning').on("click",function(){
+      location.replace("gameEntryScreen.html");
+  });
+
+  function changeBackgroundColor(event) {
+    // Ŭ            θ    li     ã  
+    var li = event.target.parentNode;
+    //    õ    ҿ  Ŭ      ߰   Ǵ      
+    li.classList.toggle('selected');
+    //  ⺻  ̺ Ʈ(  ũ  ̵ )     
+    event.preventDefault();
+}
+
+});

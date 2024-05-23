@@ -5,7 +5,7 @@ function selectLevel(level){
     audio.play();   
     $('.setting').fadeIn();
     $('.setting button').on("click",function(){
-        var color = $('[name="color"]:checked').val();
+        var color = $('[name="color"]:checked').val()[1]-1;
         var music = $('[name="bgm"]:checked').val();
         location.href="ingame.html?level=" + level + "&color=" + color + "&music=" + music;
     });

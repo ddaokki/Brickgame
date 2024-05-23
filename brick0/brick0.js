@@ -18,7 +18,7 @@ function brickGame(){
   var regex = /[^0-9]/g;
   settingVairable = settingVairable.replace(regex,""); //사용자로부터 받아온 환경변수 추출
   const level = settingVairable[0];
-  const color = settingVairable[1] - 1;
+  const color = settingVairable[1];
   const music = settingVairable[2];
 
   var audio = new Audio("music/bgm" + music + ".mp3");
@@ -402,15 +402,14 @@ function brickGame(){
 
   // 게임오버 함수
   function gameOver() {
-    return;
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
-        location.replace("gameFail.html");
+        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&score=" + score);
       }
       else
       {
         alert("도망칠수없어..");
-        location.replace("gameFail.html");
+        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&score=" + score);
       }
   }
 

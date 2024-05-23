@@ -350,9 +350,6 @@ table.new_bbslist td {
     line-height: 1.1;
 }
 
-.assignment-title{
-
-}
 tr:nth-child(even) {
     background-color: #f7f7fb;
 }
@@ -369,3 +366,4 @@ tr:nth-child(odd) {
 .AssignmentHidden{
     display: none;
 }
+

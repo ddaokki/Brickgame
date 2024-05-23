@@ -39,7 +39,7 @@ function brickGame(){
   paddle = {
     x: canvas.width / 2 - 40,
     y: canvas.height - 20,
-    w: 80,
+    w: 80 + 20 * (4-level),
     h: 10,
     speed: 8,
     dx: 0,
@@ -402,6 +402,7 @@ function brickGame(){
 
   // 게임오버 함수
   function gameOver() {
+    return;
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
         location.replace("gameFail.html");
@@ -435,7 +436,7 @@ function brickGame(){
     context.font = "16px Arial";
     context.fillStyle = "#000000";
     context.fillText(`Ball Speed: ${Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy).toFixed(2)}`, 20, 30);
-  }
+  } 
 
   // draw
   function draw() {
@@ -449,15 +450,20 @@ function brickGame(){
     drawText();
   }
 
-  // 마우스 움직임 이벤트
-  canvas.addEventListener("mousemove", mouseMoveHandler, false);
+// 마우스 움직임 이벤트
+canvas.addEventListener("mousemove", mouseMoveHandler, false);
 
   // 패들 움직임 함수
-  function mouseMoveHandler(e) {
-    var relativeX = e.clientX - 500;
-    if (relativeX > 0 && relativeX < canvas.width) {
-      paddle.x = relativeX - paddle.w / 2;
-    }
+function mouseMoveHandler(e) {
+  // 캔버스 위치 가져오기
+  var canvasRect = canvas.getBoundingClientRect();
+
+  var relativeX = e.clientX - canvasRect.left;
+
+  // relativeX가 캔버스 범위 내에 있을 때만 패들의 위치를 업데이트
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddle.x = relativeX - paddle.w / 2;
   }
+}
 
 }

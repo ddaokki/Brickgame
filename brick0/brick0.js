@@ -51,8 +51,8 @@ function brickGame(){
   // 패들 그리기
   function drawPaddle() {
     context.beginPath();
-    context.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
     context.fillStyle = "#0095dd";
+    context.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
     context.fill();
     context.closePath();
   }
@@ -70,7 +70,9 @@ function brickGame(){
     visible: true,
     opacity: 1
   };
-
+  const brickColor = [["#1E212B","#4D8B31","#FFC800","#FF8427","#ADADAD"],
+                      ["#4F3130","#753742","#AA5042","#D8BD8A","#D8D78F"],
+                      ["#1F363D","#40798C","#70A9A1","#9EC1A3","#CFE0C3"]];
   //효과 기본값
   const effectInfo = {
     w: 50,
@@ -135,15 +137,18 @@ function brickGame(){
 
   // 캔버스에 벽돌 그리기
   function drawBricks() {
+    var cnt = 0;
     bricks.forEach((column) => {
       column.forEach((brick) => {
         context.beginPath();
         context.rect(brick.x, brick.y, brick.w, brick.h);
-        context.fillStyle = brick.visible ? "#000000" : "transparent";
+        context.fillStyle = brick.visible ? brickColor[0][cnt] : "transparent";
         context.globalAlpha = brick.opacity;
         context.fill();
         context.closePath();
+        cnt++;
       });
+      cnt=0;
     });
     context.globalAlpha = 1;
   }
@@ -415,6 +420,7 @@ function brickGame(){
   // 공 속도 출력
   function drawBallSpeed() {
     context.font = "16px Arial";
+    context.fillStyle = "#000000";
     context.fillText(`Ball Speed: ${Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy).toFixed(2)}`, 20, 30);
   }
 

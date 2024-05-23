@@ -5,6 +5,7 @@
     <title>Ingame</title>
     <script src="script.js"></script>
   <link href="mystyle.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -124,9 +125,51 @@
           </div>
           <div id="content-text">
               <!--  게임화면 -->
+              <div id="report-list">
+                <table class="bbslist new_bbslist">
+                  <colgroup>
+                    <col style="width:35px;">
+                    <col style="width:40px;">
+                    <col>
+                    <col style="width:80px;">
+                    <col style="width:60px;">
+                    <col style="width:60px;">
+                    <col style="width:60px;">
+                    <col style="width:142px;">
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th scope="col" class="first">번호</th>
+                    <th scope="col">중요</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">진행</th>
+                    <th scope="col">제출</th>
+                    <th scope="col">점수</th>
+                    <th scope="col">배점</th>
+                    <th scope="col" class="last">마감일</th>
+                  </tr>
+                  </thead>
+                  <tr style="cursor: pointer">
+                    <td class="AssignmentNumber">1</td>
+                    <td class="center impt impt_off">
+                        <img alt="중요글 추가" src="https://ecampus.konkuk.ac.kr/ilos/images/common/impt_on.png">
+                    </td>
+                    <td class="assignment-title">
+                        <div class="subject-top"></div>
+                        <div class="subject-bottom">벽돌깨기</div>
+                    </td>
+                    <td class="number">종료</td>
+                    <td class="number">
+                        <img alt="제출" src="https://ecampus.konkuk.ac.kr/ilos/images/user_not_check.png" title="제출">
+                    </td>
+                    <td class="number">0</td>
+                    <td class="number">100</td>
+                    <td class="number">2024.05.23 오전 11:35</td>
+                </tr>
+                </table>
+              </div>
             <div id="mainP-hider">
               <div id="mainGamePage">
-
                 <!-- div로 감쌈 -->
                 <div id="canvas-container">
                   <canvas id="canvas" width="750px" height="530px"></canvas>
@@ -139,12 +182,6 @@
                 </div>
 
               </div>
-            </div>
-
-            <div id="gameOverScreen" class="hide">
-              <h1>Game Over</h1>
-              <h2>Your Score: <span id="finalScore"></span></h2>
-              <button onclick="restartGame()">Restart</button>
             </div>
           </div>
         </div>

@@ -79,7 +79,7 @@ function brickGame(){
     h: 20,
     padding: 10,
     offsetX: 105,
-    offsetY: 60,
+    offsetY: 0,
     visible: true,
     opacity: 1
   };
@@ -91,7 +91,7 @@ function brickGame(){
     w: 50,
     h: 20,
     offsetX: 115,
-    offsetY: 73,
+    offsetY: 13,
     padding:10,
     visible: true,
     opacity: 1
@@ -430,13 +430,6 @@ function brickGame(){
     });
   }
 
-  // 공 속도 출력
-  function drawBallSpeed() {
-    context.font = "16px Arial";
-    context.fillStyle = "#000000";
-    context.fillText(`Ball Speed: ${Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy).toFixed(2)}`, 20, 30);
-  } 
-
   // draw
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -444,7 +437,6 @@ function brickGame(){
     drawPaddle();
     drawScore();
     drawBricks();
-    drawBallSpeed(); // 속도 표시 추가
     drawBorder();
     drawText();
   }

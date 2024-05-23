@@ -28,4 +28,5 @@ $(document).ready(function() {
     };
 
     const hideInterval = setInterval(hideElement, 700);
+
 });

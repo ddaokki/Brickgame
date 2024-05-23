@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link href="gameSuccessFinalStyle.css" rel="stylesheet">
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="gameSuccessJs.js"></script>
-  <link href="mystyle.css" rel="stylesheet">
 </head>
 <body>
+<!-- 로딩 화면 -->
+<div id="loading-overlay">
+  <div id="loading-spinner"></div>
+</div>
 <div id="wrap">
   <div id="headerWrap">
     <div id="header">
@@ -294,5 +298,10 @@
     </div>
   </div>
 </div>
+<script>
+    $(window).on("load", function() {
+        $("#loading-overlay").fadeOut(4000);
+    });
+</script>
 </body>
 </html>

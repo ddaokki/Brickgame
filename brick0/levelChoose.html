@@ -9,6 +9,7 @@
   <title>Title</title>
   <link href="levelChooseStyle.css" rel="stylesheet">
   <script src="pageManager.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Title</title>
 </head>
 <body>
@@ -27,6 +28,28 @@
   <div class="box" onclick="selectLevel(3)">
     <div class="emoji">😎</div>
     <div class="level">Hard</div>
+  </div>
+  <div class="setting">
+    벽돌 색과 배경음악을 선택해주세요
+    <div class="setting-wrap">
+      <label class="brickColor" for="c1"><img src="image/brick1.png"></label>
+      <label class="brickColor" for="c2"><img src="image/brick2.png"></label>
+      <label class="brickColor" for="c3"><img src="image/brick3.png"></label>
+      <input type="radio" name="color" value="c1" id="c1" checked/>
+      <input type="radio" name="color" value="c2" id="c2"/>
+      <input type="radio" name="color" value="c3" id="c3"/>
+    </div>
+    <div class="setting-wrap">
+      <label class="music" for="m1"><img src="image/music_image.png"></label>
+      <label class="music" for="m2"><img src="image/music_image.png"></label>
+      <label class="music" for="m3"><img src="image/music_image.png"></label>
+      <input type="radio" name="bgm" value="m1" id="m1" checked/>
+      <input type="radio" name="bgm" value="m2" id="m2"/>
+      <input type="radio" name="bgm" value="m3" id="m3"/>
+    </div>
+    <div class="setting-wrap">
+      <button>선택 완료</button>
+    </div>
   </div>
 </div>
 </body>

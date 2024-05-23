@@ -48,3 +48,51 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
 }
+.setting{
+    display: none;
+    position: absolute;
+    width: 600px;
+    height: 650px;
+    left: 35%;
+    top: 25%;
+    z-index: 3;
+    background-color: #bea27b;
+    border-radius: 10px;
+    border:1px solid black;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color:white;
+}
+
+.setting-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 70px;
+}
+.setting-wrap label{
+    width: 30%;
+    height: 100px;
+}
+.setting-wrap label img{
+    height: 100%;
+    border:none;
+}
+.setting-wrap input{
+    width: 30%;
+    margin-top: 20px;
+}
+.setting-wrap button{
+    width: 150px;
+    height: 50px;
+    background-color: rgb(245, 123, 52);
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    border:1px solid;
+    border-radius: 5px;
+}

@@ -1,6 +1,8 @@
 window.onload = function(){
   $('tr').on("click",function(){
-    $('table').fadeOut();
+    $('table').css({
+      opacity:0
+    });
     brickGame();
   });
 }
@@ -11,6 +13,17 @@ function brickGame(){
 
   const canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
+  var settingVairable = location.href.split("?")[1];
+  console.log(settingVairable);
+  var regex = /[^0-9]/g;
+  settingVairable = settingVairable.replace(regex,""); //사용자로부터 받아온 환경변수 추출
+  const level = settingVairable[0];
+  const color = settingVairable[1] - 1;
+  const music = settingVairable[2];
+
+  var audio = new Audio("music/bgm" + music + ".mp3");
+  audio.volume = 0.2;
+  audio.play();
 
   // 공 기본값
   ball = {
@@ -142,7 +155,7 @@ function brickGame(){
       column.forEach((brick) => {
         context.beginPath();
         context.rect(brick.x, brick.y, brick.w, brick.h);
-        context.fillStyle = brick.visible ? brickColor[0][cnt] : "transparent";
+        context.fillStyle = brick.visible ? brickColor[color][cnt] : "transparent";
         context.globalAlpha = brick.opacity;
         context.fill();
         context.closePath();

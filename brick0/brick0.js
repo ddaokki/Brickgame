@@ -15,7 +15,6 @@ function brickGame(){
   const canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
   var settingVairable = location.href.split("?")[1];
-  console.log(settingVairable);
   var regex = /[^0-9]/g;
   settingVairable = settingVairable.replace(regex,""); //사용자로부터 받아온 환경변수 추출
   const level = settingVairable[0];
@@ -100,7 +99,7 @@ function brickGame(){
     opacity: 1
   };
 
-  const effectArray = ["", "width", "height", "ul","opacity","fontsize","display"];
+  const effectArray = ["div", "width", "height", "ul","opacity","fontsize","display",""];
 
   // 벽돌 만들기
   const bricks = [];
@@ -122,13 +121,18 @@ function brickGame(){
     effectCnt = 0; 
     for (let j = 0; j < brickColumnCount; j++) {
       var randNum;
-      if(effectCnt < effectLimit) //이펙트 개수가 한도보다 작다면
-        randNum = parseInt(Math.random() * 6);
-      else
+      if((i == parseInt(brickRowCount / 2)) && (j == 0)){
         randNum = 0;
-      if(randNum != 0){
+        effectCnt--; //div는 게임 종료 효과 이므로 효과 1개 제외
+      }
+      else if(effectCnt < effectLimit) //이펙트 개수가 한도보다 작다면
+        randNum = parseInt(Math.random() * 7 + 1);
+      else
+        randNum = 7;
+      if(randNum != 7){
         effectCnt++;
       }
+
       var text = effectArray[randNum];
       var x = i * (effectInfo.w + effectInfo.padding) + effectInfo.offsetX;
       var y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
@@ -182,16 +186,13 @@ function brickGame(){
         const effectState = this.effectStates[name];
         
         if (effectState.isRunning) {
-          console.log(`${name} is already running. Please wait.`);
           return;
         }
 
         effectState.isRunning = true;
-        console.log(`${name} started.`);
 
         effectState.timeoutId = setTimeout(() => {
           effectState.isRunning = false;
-          console.log(`${name} ended. You can run it again.`);
           drawInit();
         }, 3000);
 
@@ -199,6 +200,7 @@ function brickGame(){
       };
     }
   };
+  effectManager.registerEffect('effect0', effect_div);
   effectManager.registerEffect('effect1', effect_width);
   effectManager.registerEffect('effect2', effect_height);
   effectManager.registerEffect('effect3', effect_ul);
@@ -211,25 +213,28 @@ function brickGame(){
   function check_effects(row,col){
     switch(effects[row][col].randNum){
         case 0:
-            return;
+          effectManager.effect0();
+          return;
         case 1:
-            effectManager.effect1();
-            break;
+          effectManager.effect1();
+          break;
         case 2:
-            effectManager.effect2();
-            break;
+          effectManager.effect2();
+          break;
         case 3:
-            effectManager.effect3();
-            break;
+          effectManager.effect3();
+          break;
         case 4:
-            effectManager.effect4();
-            break;
+          effectManager.effect4();
+          break;
         case 5:
-            effectManager.effect5();
-            break;
+          effectManager.effect5();
+          break;
         case 6:
-            effectManager.effect6();
-            break;
+          effectManager.effect6();
+          break;
+        case 7:
+          return;
         
     }
   }
@@ -252,6 +257,14 @@ function brickGame(){
       }
     }
     draw();
+  }
+
+  //div 효과  
+  function effect_div(){
+    alert("승리!");
+    score = 100;
+    drawScore();
+    location.replace("gameSuccess.html");
   }
 
   //width 효과

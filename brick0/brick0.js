@@ -8,7 +8,6 @@ window.onload = function(){
 }
 
 
-// 벽돌 게임 구현(스코어 계산/게임 시작과 종료 조건 포함) – 강민호
 function brickGame(){
 
   const canvas = document.getElementById("canvas");

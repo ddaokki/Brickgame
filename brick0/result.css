@@ -1,0 +1,37 @@
+#gameover-wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 3;
+    display: none;
+}
+
+.gameover-popup{
+    box-sizing: border-box;
+    width: 500px;
+    height: 650px;
+    background-color: white;
+    border:1px solid;
+    position: absolute;
+    left: 765px;
+    top:15%;
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+.user-score{
+    box-sizing: border-box;
+    text-align: center;
+    padding-right: 20px;
+}
+
+.user-score h1{
+    font-size: 80px;
+}
+
+.user-score button{
+    margin-top: 30px;
+}

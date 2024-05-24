@@ -3,8 +3,8 @@ $(document).ready(function(){
     var li = event.target.parentNode;
     li.classList.toggle('selected');
     event.preventDefault();
-    $('#gameover-wrap').hide();
 }
+$('#gameover-wrap').hide();
 
 });
 

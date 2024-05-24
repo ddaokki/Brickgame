@@ -378,12 +378,22 @@ function brickGame(){
 
     // 패들 충돌
     if (
-      ball.x - ball.size > paddle.x && 
-      ball.x + ball.size < paddle.x + paddle.w &&
-      ball.y + ball.size > paddle.y
-    ) {
-      ball.dy = -ball.speed;
-    }
+    ball.x + ball.size > paddle.x && 
+    ball.x < paddle.x + paddle.w &&
+    ball.y + ball.size > paddle.y
+  ) { 
+    let collidePoint = ball.x - (paddle.x + paddle.w / 2);
+
+    // 패들의 폭의 절반으로 정규화
+    collidePoint = collidePoint / (paddle.w / 2);
+
+    // 반발 각도를 -45도에서 45도 사이로 설정
+    let angle = collidePoint * (Math.PI / 4);
+
+    // 새로운 방향 설정
+    ball.dx = ball.speed * Math.sin(angle);
+    ball.dy = -ball.speed * Math.cos(angle);
+  }
 
     // 벽돌 충돌
     bricks.forEach((column) => {

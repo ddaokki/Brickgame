@@ -10,6 +10,8 @@ window.onload = function(){
 
 function brickGame(){
 
+  $('#gameInfo').fadeIn();
+
   const canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
   var settingVairable = location.href.split("?")[1];
@@ -23,6 +25,8 @@ function brickGame(){
   var audio = new Audio("music/bgm" + music + ".mp3");
   audio.volume = 0.2;
   audio.play();
+
+  var time = 30; //기본 제한 시간
 
   // 공 기본값
   ball = {
@@ -306,8 +310,7 @@ function brickGame(){
   let score = 0;
   // 점수판
   function drawScore() {
-    context.font = "20px Arial";
-    context.fillText(`Score: ${score}`, canvas.width - 100, 30);
+    $('#score').text("점수: " + score);
   }
 
   //테두리 그리기
@@ -398,6 +401,15 @@ function brickGame(){
       ball.dy = 0;
     }
   }
+  var timer = setInterval(function(){
+    time--;
+    $('#timelimit').text("남은 시간: " + time);
+    if(time == 0){
+      clearInterval(timer);
+      gameOver(); //제한시간이 됐을때 게임 오버 처리
+    }
+  },1000);
+
 
   // 게임오버 함수
   function gameOver() {

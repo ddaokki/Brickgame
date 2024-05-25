@@ -25,7 +25,7 @@ function brickGame(){
   audio.volume = 0.2;
   audio.play();
 
-  var time = 30 + 10 * (3-level); //기본 제한 시간
+  var time = 40 + 15 * (3-level); //기본 제한 시간
 
   // 공 기본값
   ball = {

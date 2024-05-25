@@ -372,8 +372,8 @@ tr:nth-child(odd) {
     display: none;
     box-sizing: border-box;
     border:1px solid;
-    right: 90px;
-    top: 380px;
+    right: 190px;
+    top: 375px;
     width: 320px;
     height: 300px;
     padding-left: 15px;

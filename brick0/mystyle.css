@@ -372,9 +372,10 @@ tr:nth-child(odd) {
     display: none;
     box-sizing: border-box;
     border:1px solid;
-    right: 190px;
+    right: 170px;
     top: 375px;
-    width: 320px;
+    width: 350px;
     height: 300px;
     padding-left: 15px;
+    padding-right: 15px;
 }

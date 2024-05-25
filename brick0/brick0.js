@@ -300,6 +300,8 @@ function brickGame(){
         }
       }
     }
+    drawText();
+    drawBricks();
   }
   function effect_opacity(){
     for(let i = 0; i < brickRowCount; i++) {
@@ -427,15 +429,21 @@ function brickGame(){
   var timer = setInterval(function(){
     time--;
     $('#timelimit').text("남은 시간: " + time);
+    if(time==20){
+      showHint();
+    }
     if(time == 0){
       clearInterval(timer);
       gameOver(); //제한시간이 됐을때 게임 오버 처리
     }
   },1000);
 
-
+  function showHint(){
+    $('#hint').fadeIn();
+  }
   // 게임오버 함수
   function gameOver() {
+    
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
         location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&score=" + score);

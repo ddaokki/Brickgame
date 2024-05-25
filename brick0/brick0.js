@@ -35,6 +35,8 @@ function brickGame(){
     speed: 4,
     dx: 2,
     dy: -2,
+    hits:-1,
+    isLiEffect:false
   };
 
   // 패들 기본값
@@ -79,7 +81,7 @@ function brickGame(){
   const brickInfo = {
     w: 50,
     h: 20,
-    padding: 10,
+    padding: 5,
     offsetX: 105,
     offsetY: 0,
     visible: true,
@@ -94,12 +96,12 @@ function brickGame(){
     h: 20,
     offsetX: 115,
     offsetY: 13,
-    padding:10,
+    padding:5,
     visible: true,
     opacity: 1
   };
 
-  const effectArray = ["div", "width", "height", "ul","opacity","fontsize","display",""];
+  const effectArray = ["div", "width", "height", "ul","opacity","float","scale(1.5)",""];
 
   // 벽돌 만들기
   const bricks = [];
@@ -205,8 +207,8 @@ function brickGame(){
   effectManager.registerEffect('effect2', effect_height);
   effectManager.registerEffect('effect3', effect_ul);
   effectManager.registerEffect('effect4', effect_opacity);
-  effectManager.registerEffect('effect5', effect_fontsize);
-  effectManager.registerEffect('effect6', effect_display);
+  effectManager.registerEffect('effect5', effect_float);
+  effectManager.registerEffect('effect6', effect_scale);
 
 
   //체크한 효과들 시행
@@ -291,36 +293,108 @@ function brickGame(){
     drawText();
     drawBricks();
   }
-  function effect_ul(){
-    for(let i = 0; i < brickRowCount; i++) {
-      for (let j = 0; j < brickColumnCount; j++) {
-        if(effects[i][j].randNum==0 && effects[i][j].visible==true){
-          effects[i][j].text="li";
-          
+  function effect_ul() {
+    let found = false;
+    while (!found) {
+      const randomRow = Math.floor(Math.random() * brickRowCount);
+      const randomCol = Math.floor(Math.random() * brickColumnCount);
+  
+      const targetBrick = bricks[randomRow][randomCol];
+      const targetEffect = effects[randomRow][randomCol];
+  
+      if (targetBrick.visible && targetEffect.text === "ul") {
+        const hitCount = Math.floor(Math.random() * 5) + 3; // 3~7 사이의 랜덤 값
+        targetBrick.hits = hitCount;
+        targetBrick.isLiEffect = true; // li 효과가 적용된 블록임을 표시
+        targetEffect.text = `li(${hitCount})`;
+        found = true;
+      }
+    }
+  
+    draw();
+  }
+  function effect_opacity() {
+    const randomBlocks = [];
+    while (randomBlocks.length < 3) {
+      const randomRow = Math.floor(Math.random() * brickRowCount);
+      const randomCol = Math.floor(Math.random() * brickColumnCount);
+      const randomBlock = { row: randomRow, col: randomCol };
+  
+      // 중복 및 부숴진 블록 확인
+      if (!randomBlocks.some(block => block.row === randomRow && block.col === randomCol) && bricks[randomRow][randomCol].visible) {
+        randomBlocks.push(randomBlock);
+      }
+    }
+  
+    randomBlocks.forEach(block => {
+      bricks[block.row][block.col].opacity = 0;
+      effects[block.row][block.col].opacity = 0;
+    });
+  
+    draw();
+  }
+
+  function handleCollisionWithBrick(brick, effect) {
+    if (brick.visible) {
+      if (brick.isLiEffect && brick.hits > 0) {
+        brick.hits--;
+        effect.text = `li(${brick.hits})`;
+        if (brick.hits === 0) {
+          brick.visible = false;
+          effect.visible = false;
         }
+      } else if (!brick.isLiEffect) {
+        brick.visible = false;
+        effect.visible = false;
       }
+      draw();
     }
-    drawText();
-    drawBricks();
-  }
-  function effect_opacity(){
-    for(let i = 0; i < brickRowCount; i++) {
-      for (let j = 0; j < brickColumnCount; j++) {
-        bricks[i][j].opacity=0;
-        effects[i][j].opacity=0;
-      }
-    }
-    drawText();
-    drawBricks();
-  }
-  function effect_fontsize(){
-    ball.size += 7;
   }
 
-  function effect_display(){
-    console.log(1);
+  function effect_float() {
+    const floatDirection = Math.random() < 0.5 ? "L" : "R"; // 랜덤하게 L 또는 R 선택
+  
+    // L이면 모든 블록들을 왼쪽으로 정렬, R이면 모든 블록들을 오른쪽으로 정렬
+    if (floatDirection === "L") {
+      const minX = Math.min(...bricks.map(column => column[0].x)); // 가장 왼쪽 블록의 x 좌표
+      if (minX > 0) { // 이미 왼쪽으로 정렬되어 있지 않은 경우에만 정렬
+        const shiftAmount = minX; // 왼쪽으로 이동할 양
+        bricks.forEach(column => {
+          column.forEach(brick => {
+            brick.x -= shiftAmount; // 모든 블록들을 왼쪽으로 이동
+          });
+        });
+        effects.forEach(column => {
+          column.forEach(effect => {
+            effect.x -= shiftAmount; // 모든 블록들을 왼쪽으로 이동
+          });
+        });
+      }
+    } else if (floatDirection === "R") {
+      const maxX = Math.max(...bricks.map(column => column[brickColumnCount - 1].x + brickInfo.w)); // 가장 오른쪽 블록의 x 좌표
+      if (maxX < canvas.width) { // 이미 오른쪽으로 정렬되어 있지 않은 경우에만 정렬
+        const shiftAmount = canvas.width - maxX; // 오른쪽으로 이동할 양
+        bricks.forEach(column => {
+          column.forEach(brick => {
+            brick.x += shiftAmount; // 모든 블록들을 오른쪽으로 이동
+          });
+        });
+        
+        effects.forEach(column => {
+          column.forEach(effect => {
+            effect.x += shiftAmount; // 모든 블록들을 왼쪽으로 이동
+          });
+        });
+      }
+    }
+  
+    draw(); // 변경된 위치에 따라 새로 그리기
   }
 
+  function effect_scale() {
+    ball.size *= 1.5; // ball.size를 1.2배로 늘림
+    draw(); // 변경된 크기에 따라 새로 그리기
+  }
 
   let score = 0;
   // 점수판
@@ -411,6 +485,7 @@ function brickGame(){
             brick.visible = false;
             effects[brick.i][brick.j].visible = false;
             check_effects(brick.i,brick.j);
+            handleCollisionWithBrick(brick, effects[brick.i][brick.j]);
             increaseScore();
           }
         }

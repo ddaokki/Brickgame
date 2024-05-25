@@ -25,7 +25,7 @@ function brickGame(){
   audio.volume = 0.2;
   audio.play();
 
-  var time = 30; //기본 제한 시간
+  var time = 30 + 10 * (3-level); //기본 제한 시간
 
   // 공 기본값
   ball = {
@@ -74,15 +74,15 @@ function brickGame(){
     context.closePath();
   }
 
-  const brickRowCount = 9; //한 행에 들어있는 벽돌 갯수
-  const brickColumnCount = 5; // 한 열에 들어 있는 벽돌 갯수
+  const brickRowCount = 9 - (3-level); //한 행에 들어있는 벽돌 갯수
+  const brickColumnCount = 5 - (3-level); // 한 열에 들어 있는 벽돌 갯수
 
   // 벽돌 기본값
   const brickInfo = {
-    w: 50,
+    w: 50 + 20 * (3-level),
     h: 20,
     padding: 5,
-    offsetX: 105,
+    offsetX: 105 - 25 * (3-level),
     offsetY: 0,
     visible: true,
     opacity: 1
@@ -92,16 +92,16 @@ function brickGame(){
                       ["#1F363D","#40798C","#70A9A1","#9EC1A3","#CFE0C3"]];
   //효과 기본값
   const effectInfo = {
-    w: 50,
+    w: 50 + 20 * (3-level),
     h: 20,
-    offsetX: 115,
+    offsetX: 105 - 20 * (3-level),
     offsetY: 13,
     padding:5,
     visible: true,
     opacity: 1
   };
 
-  const effectArray = ["div", "width", "height", "ul","opacity","float","scale(1.5)",""];
+  const effectArray = ["div", "width", "height", "scale","opacity","float","ul",""];
 
   // 벽돌 만들기
   const bricks = [];
@@ -128,7 +128,8 @@ function brickGame(){
         effectCnt--; //div는 게임 종료 효과 이므로 효과 1개 제외
       }
       else if(effectCnt < effectLimit) //이펙트 개수가 한도보다 작다면
-        randNum = parseInt(Math.random() * 7 + 1);
+        if (level==1)randNum = 7;  //1레벨이면 이펙트 부여 x
+        else randNum = parseInt(Math.random() * 7 + 1);
       else
         randNum = 7;
       if(randNum != 7){
@@ -205,10 +206,10 @@ function brickGame(){
   effectManager.registerEffect('effect0', effect_div);
   effectManager.registerEffect('effect1', effect_width);
   effectManager.registerEffect('effect2', effect_height);
-  effectManager.registerEffect('effect3', effect_ul);
+  effectManager.registerEffect('effect3', effect_scale);
   effectManager.registerEffect('effect4', effect_opacity);
   effectManager.registerEffect('effect5', effect_float);
-  effectManager.registerEffect('effect6', effect_scale);
+  effectManager.registerEffect('effect6', effect_ul);
 
 
   //체크한 효과들 시행
@@ -245,7 +246,7 @@ function brickGame(){
   function drawInit(){
     for(let i = 0; i < brickRowCount; i++) {
       for (let j = 0; j < brickColumnCount; j++) {
-        bricks[i][j].w = 50;
+        bricks[i][j].w = 50 + 20 * (3-level);
         bricks[i][j].h = 20;
         bricks[i][j].opacity= 1;
         effects[i][j].opacity= 1;
@@ -261,8 +262,41 @@ function brickGame(){
     draw();
   }
 
-  //div 효과  
-  function effect_div(){
+
+  function effect_div() {
+    /*
+    const divRow = parseInt(brickRowCount / 2); // div 블록의 행 위치
+    const divCol = 0; // div 블록의 열 위치
+
+    const divBrick = bricks[divRow][divCol]; // div 블록 가져오기
+  
+    if (divBrick.hits === -1) {
+      // 첫 번째 부딪힘
+      context.fillStyle = "green";
+      divBrick.visible = true; // 블록을 보이도록 설정
+      context.fillRect(divBrick.x, divBrick.y, divBrick.width, divBrick.height);
+      divBrick.hits = 1;
+    } else if (divBrick.hits === 1) {
+      // 두 번째 부딪힘
+      context.fillStyle = "yellow";
+      divBrick.visible = true; // 블록을 보이도록 설정
+      context.fillRect(divBrick.x, divBrick.y, divBrick.width, divBrick.height);
+      divBrick.hits = 2;
+    } else if (divBrick.hits === 2) {
+      // 세 번째 부딪힘 (승리 조건)
+      context.fillStyle = "red";
+      divBrick.visible = true; // 블록을 보이도록 설정
+      context.fillRect(divBrick.x, divBrick.y, divBrick.width, divBrick.height);
+      divBrick.hits = 3;
+    }
+    else if(divBrick.hits == 3){
+      alert("승리!");
+      score = 100;
+      drawScore();
+      location.replace("gameSuccess.html");
+    } */
+  
+    //draw(); // 변경된 상태에 따라 다시 그리기
     alert("승리!");
     score = 100;
     drawScore();
@@ -273,7 +307,7 @@ function brickGame(){
   function effect_width(){
     for(let i = 0; i < brickRowCount; i++) {
       for (let j = 0; j < brickColumnCount; j++) {
-        bricks[i][j].w = 60;
+        bricks[i][j].w += 10;
         bricks[i][j].x += 10 * i - 50;
         effects[i][j].x += 10 * i - 50;
       }
@@ -482,10 +516,13 @@ function brickGame(){
             ball.y - ball.size < brick.y + brick.h 
           ) {
             ball.dy *= -1;
-            brick.visible = false;
-            effects[brick.i][brick.j].visible = false;
+            if(effects[brick.i][brick.j].randNum != 6  && effects[brick.i][brick.j].randNum != 0){
+              brick.visible = false;
+              effects[brick.i][brick.j].visible = false;
+            }
+            else if(effects[brick.i][brick.j].randNum == 6)
+              handleCollisionWithBrick(brick, effects[brick.i][brick.j]);
             check_effects(brick.i,brick.j);
-            handleCollisionWithBrick(brick, effects[brick.i][brick.j]);
             increaseScore();
           }
         }
@@ -504,7 +541,7 @@ function brickGame(){
   var timer = setInterval(function(){
     time--;
     $('#timelimit').text("남은 시간: " + time);
-    if(time==20){
+    if(time==20 + 10 * (3-level)){
       showHint();
     }
     if(time == 0){

@@ -117,7 +117,7 @@ function brickGame(){
   //효과 만들기 
   var effects = [];
   var effectCnt = 0;
-  const effectLimit = 2;
+  const effectLimit = level;
   for (let i = 0; i < brickRowCount; i++) {
     effects[i] = []; 
     effectCnt = 0; 

@@ -10,7 +10,6 @@ window.onload = function(){
 
 function brickGame(){
 
-  $('#gameInfo').fadeIn();
 
   window.scrollTo(0,700);
   const canvas = document.getElementById("canvas");
@@ -21,24 +20,44 @@ function brickGame(){
   const level = settingVairable[0];
   const color = settingVairable[1];
   const music = settingVairable[2];
+  const character = settingVairable[3]; 
+
+  console.log(character);
+
+  
+  $('#char').attr("src", "image/char" + character + ".png");
+  $('#gameInfo').fadeIn();
 
   var audio = new Audio("music/bgm" + music + ".mp3");
   audio.volume = 0.2;
   audio.play();
 
-  var time = 40 + 10 * (3-level); //기본 제한 시간
+  var time = 60; //기본 제한 시간
 
   // 공 기본값
   ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    size: 10,
-    speed: 4,
+    size: 15,
+    speed: 2,
     dx: 2,
     dy: -2,
     hits:-1,
     isLiEffect:false
   };
+
+  if (level == 1){
+    ball.size = 15;
+    ball.speed = 2;
+  }
+  else if (level == 2){
+    ball.size = 13;
+    ball.speed = 3;
+  }
+  else if (level == 3){
+    ball.size = 10;
+    ball.speed = 4;
+  }
 
   // 패들 기본값
   paddle = {
@@ -78,7 +97,6 @@ function brickGame(){
   var brickRowCount = 9 - (3-level); //한 행에 들어있는 벽돌 갯수
   if (level==3)  brickRowCount = 10;
   var brickColumnCount = 5 - (3-level); // 한 열에 들어 있는 벽돌 갯수
-  if (level==1)  brickColumnCount = 1;
   // 벽돌 기본값
   const brickInfo = {
     w: 60 + 20 * (3-level),
@@ -102,7 +120,7 @@ function brickGame(){
     opacity: 1
   };
 
-  const effectArray = ["div", "width", "height", "scale","opacity","float","ul",""];
+  const effectArray = ["div", "width", "height", "scale","opacity","float","fixed",""];
 
   // 벽돌 만들기
   const bricks = [];
@@ -240,7 +258,6 @@ function brickGame(){
   effectManager.registerEffect('effect3', effect_scale);
   effectManager.registerEffect('effect4', effect_opacity);
   effectManager.registerEffect('effect5', effect_float);
-  effectManager.registerEffect('effect6', effect_ul);
 
 
   //체크한 효과들 시행
@@ -266,7 +283,6 @@ function brickGame(){
           break;
         case 6:
           return;
-          effectManager.effect6();
           break;
         case 7:
           return;
@@ -334,6 +350,9 @@ function brickGame(){
 
   //width 효과
   function effect_width(){
+    if(effectManager.effectStates['effect5'].isRunning == true){
+      return;
+    }
     for(let i = 0; i < brickRowCount; i++) {
       for (let j = 0; j < brickColumnCount; j++) {
         bricks[i][j].w += 10;
@@ -350,32 +369,13 @@ function brickGame(){
       for (let j = 0; j < brickColumnCount; j++) {
         bricks[i][j].y += 10 * j;
         effects[i][j].y += 10 * j; 
-        bricks[i][j].h += 15;
+        bricks[i][j].h += 10;
+        effects[i][j].h += 10;
       }
     }  
-    drawText();
-    drawBricks();
-  }
-  function effect_ul() {
-    let found = false;
-    while (!found) {
-      const randomRow = Math.floor(Math.random() * brickRowCount);
-      const randomCol = Math.floor(Math.random() * brickColumnCount);
-  
-      const targetBrick = bricks[randomRow][randomCol];
-      const targetEffect = effects[randomRow][randomCol];
-  
-      if (targetBrick.visible && targetEffect.text === "ul") {
-        const hitCount = Math.floor(Math.random() * 5) + 3; // 3~7 사이의 랜덤 값
-        targetBrick.hits = hitCount;
-        targetBrick.isLiEffect = true; // li 효과가 적용된 블록임을 표시
-        targetEffect.text = `li(${hitCount})`;
-        found = true;
-      }
-    }
-  
     draw();
   }
+  
   function effect_opacity() {
     const randomBlocks = [];
     while (randomBlocks.length < 3) {
@@ -397,24 +397,12 @@ function brickGame(){
     draw();
   }
 
-  function handleCollisionWithBrick(brick, effect) {
-    if (brick.visible) {
-      if (brick.isLiEffect && brick.hits > 0) {
-        brick.hits--;
-        effect.text = `li(${brick.hits})`;
-        if (brick.hits === 0) {
-          brick.visible = false;
-          effect.visible = false;
-        }
-      } else if (!brick.isLiEffect) {
-        brick.visible = false;
-        effect.visible = false;
-      }
-      draw();
-    }
-  }
+  
 
   function effect_float() {
+    if(effectManager.effectStates['effect1'].isRunning == true){
+      return;
+    }
     const floatDirection = Math.random() < 0.5 ? "L" : "R"; // 랜덤하게 L 또는 R 선택
   
     // L이면 모든 블록들을 왼쪽으로 정렬, R이면 모든 블록들을 오른쪽으로 정렬
@@ -568,7 +556,7 @@ function brickGame(){
   var timer = setInterval(function(){
     time--;
     $('#timelimit').text("남은 시간: " + time);
-    if(time==20 + 10 * (3-level)){
+    if(time==45){
       showHint();
     }
     if(time == 0){
@@ -582,15 +570,14 @@ function brickGame(){
   }
   // 게임오버 함수
   function gameOver() {
-    return;
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
-        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&score=" + score);
+        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
       }
       else
       {
         alert("도망칠수없어..");
-        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&score=" + score);
+        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
       }
   }
 

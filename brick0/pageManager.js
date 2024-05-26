@@ -7,7 +7,8 @@ function selectLevel(level){
     $('.setting button').on("click",function(){
         var color = $('[name="color"]:checked').val()[1]-1;
         var music = $('[name="bgm"]:checked').val();
-        location.href="ingame.html?level=" + level + "&color=" + color + "&music=" + music;
+        var character = $('[name="character"]:checked').val()[2];
+        location.href="ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character;
     });
     
 }

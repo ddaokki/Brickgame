@@ -48,19 +48,38 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
 }
+.box img{
+    position: absolute;
+    width: 50%;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.box:nth-child(2) img{
+    width: 65%;
+    top: 57%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+}
+.box:nth-child(3) img{
+    width: 65%;
+    top: 57%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+}
 .setting{
     display: none;
     position: absolute;
     width: 600px;
-    height: 650px;
+    height: 850px;
     left: 35%;
-    top: 25%;
+    top: 5%;
     z-index: 3;
     background-color: #bea27b;
     border-radius: 10px;
     border:1px solid black;
     text-align: center;
-    font-size: 30px;
+    font-size: 28px;
     padding-top: 30px;
     box-sizing: border-box;
     font-weight: bold;

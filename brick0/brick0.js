@@ -43,7 +43,6 @@ function brickGame(){
     dx: 2,
     dy: -2,
     hits:-1,
-    isLiEffect:false
   };
 
   if (level == 1){
@@ -69,21 +68,16 @@ function brickGame(){
     dx: 0,
   };
 
-  // 공 이미지
-  var ballImage = new Image();
-  ballImage.src = 'image/delete.jpg'; // 공 이미지 파일 경로
+  
 
-  // 공 그리기
+  // 공 그리기 함수
   function drawBall() {
-    // 이미지가 로드되었을 때만 그리기
-    if (ballImage.complete) {
-      context.drawImage(ballImage, ball.x - ball.size*1.5, ball.y - ball.size*1.5, ball.size * 3, ball.size * 3);
-    } else {
-      ballImage.onload = function() {
-        context.drawImage(ballImage, ball.x - ball.size, ball.y - ball.size, ball.size * 2, ball.size * 2);
-      };
-    }
-  }
+    context.beginPath();
+    context.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
+    context.fillStyle = '#6fadcf';
+    context.fill();
+    context.closePath();
+}
 
   // 패들 그리기
   function drawPaddle() {
@@ -283,7 +277,6 @@ function brickGame(){
           break;
         case 6:
           return;
-          break;
         case 7:
           return;
         
@@ -341,11 +334,26 @@ function brickGame(){
       divBrick.hits = 3;
     }
     else if(divBrick.hits == 3){
-      alert("승리!");
-      score = 100;
-      drawScore();
-      location.replace("gameSuccess.html");
+      show_win(); 
+      window.setTimeout(effect_win,1500);
     }
+  }
+  function show_win(){
+      ball.dx = 0;
+      ball.dy = 0;
+      for(let i = 0; i < brickRowCount; i++) {
+        for (let j = 0; j < brickColumnCount; j++) {
+          bricks[i][j].visible = false;
+          effects[i][j].visible = false;
+        }
+      }  
+    draw(); 
+  }
+  function effect_win() {
+    alert("해냈다! 모든 블럭을 부쉈어!");
+    score = 100;
+    drawScore();
+    location.replace("gameSuccess.html");
   }
 
   //width 효과
@@ -474,6 +482,7 @@ function brickGame(){
 
   update();
 
+
   // 패들 움직이는 함수
   function movePaddle() {
     paddle.x += paddle.dx;
@@ -532,8 +541,19 @@ function brickGame(){
             ball.y + ball.size > brick.y &&
             ball.y - ball.size < brick.y + brick.h 
           ) {
-            ball.dy *= -1;
-            if(effects[brick.i][brick.j].randNum != 6  && effects[brick.i][brick.j].randNum != 0){
+            // 공이 벽돌의 각 변과 충돌했는지 확인
+            let prevX = ball.x - ball.dx;
+            let prevY = ball.y - ball.dy;
+
+            if (
+              prevX + ball.size <= brick.x || 
+              prevX - ball.size >= brick.x + brick.w
+            ) {
+              ball.dx *= -1; // 좌우 변에서 충돌
+            } else {
+              ball.dy *= -1; // 상하 변에서 충돌
+            }
+            if((effects[brick.i][brick.j].randNum < 6  && effects[brick.i][brick.j].randNum > 0) || effects[brick.i][brick.j].randNum==7){
               brick.visible = false;
               effects[brick.i][brick.j].visible = false;
             }

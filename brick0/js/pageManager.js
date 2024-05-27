@@ -1,6 +1,6 @@
 var audio;
 function selectLevel(level){ 
-    audio = new Audio("music/bgm1.mp3");
+    audio = new Audio("../music/bgm1.mp3");
     audio.volume = 0.2;
     audio.play();   
     $('.setting').fadeIn();
@@ -8,7 +8,7 @@ function selectLevel(level){
         var color = $('[name="color"]:checked').val()[1]-1;
         var music = $('[name="bgm"]:checked').val();
         var character = $('[name="character"]:checked').val()[2];
-        location.href="ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character;
+        location.href="../html/ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character;
     });
     
 }

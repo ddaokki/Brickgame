@@ -21,9 +21,9 @@ $(document).ready(function() {
             currentIndex++;
         } else {
             clearInterval(hideInterval);
-            $("link[href='mystyle.css']").remove();
+            $("link[href='../css/mystyle.css']").remove();
 
-            window.location.href = "gameSuccessFinal.html";
+            window.location.href = "../html/gameSuccessFinal.html";
         }
     };
 

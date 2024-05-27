@@ -353,7 +353,7 @@ function brickGame(){
     alert("해냈다! 모든 블럭을 부쉈어!");
     score = 100;
     drawScore();
-    location.replace("gameSuccess.html");
+    location.replace("../html/gameSuccess.html");
   }
 
   //width 효과
@@ -592,12 +592,12 @@ function brickGame(){
   function gameOver() {
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
-        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
+        location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
       }
       else
       {
         alert("도망칠수없어..");
-        location.replace("gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
+        location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
       }
   }
 

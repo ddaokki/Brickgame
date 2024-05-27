@@ -21,9 +21,9 @@ function showResult(){
     $('#score').text(score + "점");
         
     $('#restart').on("click",function(){
-        location.replace("ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character);
+        location.replace("../html/ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character);
     });
     $('#beginning').on("click",function(){
-        location.replace("gameEntryScreen.html");
+        location.replace("../index.html");
     });
 }

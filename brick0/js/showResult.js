@@ -7,6 +7,6 @@ function showResult(){
     $('#gameover-wrap').fadeIn();
     $('#score').text("100점");
     $('#beginning').on("click",function(){
-        location.replace("gameEntryScreen.html");
+        location.replace("../index.html");
     });
 }

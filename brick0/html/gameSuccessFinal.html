@@ -3,12 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/gameSuccessJs.js"></script>
-  <link href="css/mystyle.css" rel="stylesheet">
+  <link href="../css/gameSuccessFinalStyle.css" rel="stylesheet">
+  <link href="../css/result.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/showResult.js"></script>
 </head>
 <body>
+  
+<div id="gameover-wrap">
+  <div class="gameover-popup">
+    <h3>[서울] 웹프로그래밍(003)<br><br>
+      <span style="color:green">[과제]</span> 과제 점수가 공개되었습니다. "벽돌깨기"<br><br>
+      당신의 과제는
+    </h3>
+    <div class="user-score">
+      <h1 id="score">
+
+      </h1>
+      <h3>
+        다행히도 이번 과제도 해결했다..! 이런 과제가 또 있진 않겠지?
+      </h3>
+      <button id="beginning">처음으로</button>
+    </div>
+  </div>
+</div>
+<!-- 로딩 화면 -->
+<div id="loading-overlay">
+  <div id="loading-spinner"></div>
+</div>
 <div id="wrap">
   <div id="headerWrap">
     <div id="header">
@@ -295,5 +318,10 @@
     </div>
   </div>
 </div>
+<script>
+    $(window).on("load", function () {
+        $("#loading-overlay").fadeOut(4000);
+    });
+</script>
 </body>
 </html>

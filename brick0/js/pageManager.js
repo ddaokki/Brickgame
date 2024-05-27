@@ -24,4 +24,9 @@ $(document).ready(function() {
         audio.volume = 0.2;
         audio.play();
     });
+    $("#x_img").on("click",function(){
+        $('.setting').fadeOut();
+        check = false;
+        audio.pause();
+    });
 });

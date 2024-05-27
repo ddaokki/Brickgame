@@ -70,7 +70,7 @@ body {
 .setting{
     display: none;
     position: absolute;
-    width: 600px;
+    width: 650px;
     height: 850px;
     left: 35%;
     top: 5%;
@@ -115,11 +115,8 @@ body {
     border:1px solid;
     border-radius: 5px;
 }
-#setting-btn{
-    justify-content:center;
-
-
-}
-#setting-btn> * {
-    margin-left: 30px;
+#x_img{
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }

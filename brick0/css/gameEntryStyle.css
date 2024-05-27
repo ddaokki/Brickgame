@@ -92,6 +92,7 @@ nav ul li a{
     opacity: 0;
     transform: translateY(30px);
     animation: moveUp 0.5s linear forwards;
+    word-break: keep-all;
 }
 
 @keyframes moveUp {
@@ -99,4 +100,8 @@ nav ul li a{
         opacity: 1;
         transform: translateY(0px);
     }
+}
+
+p{
+    width: 700px;
 }

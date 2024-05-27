@@ -25,10 +25,10 @@ function brickGame(){
   console.log(character);
 
   
-  $('#char').attr("src", "image/char" + character + ".png");
+  $('#char').attr("src", "../image/char" + character + ".png");
   $('#gameInfo').fadeIn();
 
-  var audio = new Audio("music/bgm" + music + ".mp3");
+  var audio = new Audio("../music/bgm" + music + ".mp3");
   audio.volume = 0.2;
   audio.play();
 
@@ -536,22 +536,23 @@ function brickGame(){
       column.forEach((brick) => {
         if (brick.visible) {
           if (
-            ball.x - ball.size > brick.x && 
-            ball.x + ball.size < brick.x + brick.w && 
-            ball.y + ball.size > brick.y &&
-            ball.y - ball.size < brick.y + brick.h 
+            ball.x + ball.size / 2 > brick.x && // 공의 오른쪽이 벽돌의 왼쪽보다 오른쪽에 있는지 확인
+            ball.x - ball.size / 2 < brick.x + brick.w && // 공의 왼쪽이 벽돌의 오른쪽보다 왼쪽에 있는지 확인
+            ball.y + ball.size / 2 > brick.y && // 공의 아래쪽이 벽돌의 위쪽보다 아래에 있는지 확인
+            ball.y - ball.size / 2 < brick.y + brick.h // 공의 위쪽이 벽돌의 아래쪽보다 위에 있는지 확인
           ) {
-            // 공이 벽돌의 각 변과 충돌했는지 확인
-            let prevX = ball.x - ball.dx;
-            let prevY = ball.y - ball.dy;
-
-            if (
-              prevX + ball.size <= brick.x || 
-              prevX - ball.size >= brick.x + brick.w
-            ) {
-              ball.dx *= -1; // 좌우 변에서 충돌
-            } else {
-              ball.dy *= -1; // 상하 변에서 충돌
+            // 충돌 면을 결정
+            const collideFromTop = ball.y + ball.size / 2 - ball.dy <= brick.y;
+            const collideFromBottom = ball.y - ball.size / 2 - ball.dy >= brick.y + brick.h;
+            const collideFromLeft = ball.x + ball.size / 2 - ball.dx <= brick.x;
+            const collideFromRight = ball.x - ball.size / 2 - ball.dx >= brick.x + brick.w;
+  
+            // 충돌 면에 따라 공의 방향을 반전
+            if (collideFromTop || collideFromBottom) {
+              ball.dy *= -1;
+            }
+            if (collideFromLeft || collideFromRight) {
+              ball.dx *= -1;
             }
             if((effects[brick.i][brick.j].randNum < 6  && effects[brick.i][brick.j].randNum > 0) || effects[brick.i][brick.j].randNum==7){
               brick.visible = false;

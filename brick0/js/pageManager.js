@@ -1,5 +1,9 @@
 var audio;
 function selectLevel(level){ 
+    if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
     audio = new Audio("../music/bgm1.mp3");
     audio.volume = 0.2;
     audio.play();   
@@ -13,8 +17,8 @@ function selectLevel(level){
     
 }
 
-$(document).ready(function(){
-    $("input[name='bgm']").change(function(){
+$(document).ready(function() {
+    $("input[name='bgm']").change(function() {
         audio.pause();
         var music = $("input[name='bgm']:checked").val()[1];
         audio = new Audio("music/bgm" + music + ".mp3");

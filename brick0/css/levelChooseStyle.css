@@ -115,3 +115,11 @@ body {
     border:1px solid;
     border-radius: 5px;
 }
+#setting-btn{
+    justify-content:center;
+
+
+}
+#setting-btn> * {
+    margin-left: 30px;
+}

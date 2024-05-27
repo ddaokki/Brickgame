@@ -114,7 +114,7 @@ function brickGame(){
     opacity: 1
   };
 
-  const effectArray = ["div", "width", "height", "scale","opacity","float","fixed",""];
+  const effectArray = ["div", "width", "height", "scale","opacity","float","ul","","fixed","li"];
 
   // 벽돌 만들기
   const bricks = [];
@@ -151,7 +151,7 @@ function brickGame(){
       }
       else if(effectCnt < effectLimit) //이펙트 개수가 한도보다 작다면
         if (level==1)randNum = 7;  //1레벨이면 이펙트 부여 x
-        else randNum = parseInt(Math.random() * 7 + 1);
+        else randNum = parseInt(Math.random() * 8 + 1);
       else
         randNum = 7;
       if(randNum != 7){
@@ -252,6 +252,8 @@ function brickGame(){
   effectManager.registerEffect('effect3', effect_scale);
   effectManager.registerEffect('effect4', effect_opacity);
   effectManager.registerEffect('effect5', effect_float);
+  effectManager.registerEffect('effect6', effect_ul);
+  effectManager.registerEffect('effect9', effect_li);
 
 
   //체크한 효과들 시행
@@ -276,9 +278,15 @@ function brickGame(){
           effectManager.effect5();
           break;
         case 6:
-          return;
+          effectManager.effect6();
+          break;
         case 7:
           return;
+        case 8:   //fixed
+          return;
+        case 9:
+          effectManager.effect9();
+          break;
         
     }
   }
@@ -453,6 +461,36 @@ function brickGame(){
   function effect_scale() {
     ball.size *= 1.5; // ball.size를 1.2배로 늘림
     draw(); // 변경된 크기에 따라 새로 그리기
+  }
+
+  function effect_ul() {
+    var li_count=0;
+    
+    for(let i = 0; i < brickRowCount; i++) {
+      
+      for (let j = 0; j < brickColumnCount; j++) {
+        var li_rand=Math.floor(Math.random() * 2);
+        if(li_count<3 && bricks[i][j].visible &&effects[i][j].randNum==7 && li_rand == 1){
+          effects[i][j].text="li";
+          effects[i][j].randNum= 9;
+          li_count++;
+          
+        }
+      }
+    }
+     
+     draw();
+  }
+  function effect_li() {
+    for(let i = 0; i < brickRowCount; i++) {
+      
+      for (let j = 0; j < brickColumnCount; j++){
+        if(bricks[i][j].visible && effects[i][j].text=="li"){
+           bricks[i][j].visible = false;
+          effects[i][j].visible = false;
+        }
+      }
+    }
   }
 
   let score = 0;

@@ -1,9 +1,8 @@
 var audio;
-function selectLevel(level){ 
-    if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-    }
+var check = false;
+function selectLevel(level){
+    if(check == true)
+        return;
     audio = new Audio("../music/bgm1.mp3");
     audio.volume = 0.2;
     audio.play();   
@@ -14,7 +13,7 @@ function selectLevel(level){
         var character = $('[name="character"]:checked').val()[2];
         location.href="../html/ingame.html?level=" + level + "&color=" + color + "&music=" + music + "&character=" + character;
     });
-    
+    check = true;
 }
 
 $(document).ready(function() {

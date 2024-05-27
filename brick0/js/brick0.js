@@ -168,8 +168,40 @@ function brickGame(){
       var x = i * (effectInfo.w + effectInfo.padding) + offsetX;
       var y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
       effects[i][j] = {x, y, randNum, text , offsetX, ...effectInfo};
+
+      //fixed 6개까지만 허용
+      if(effects[i][j].text == "fixed"){
+        fixedCount++;
+        if(fixedCount>6){
+          effects[i][j].text = "";
+          effects[i][j].randNum = 7;
+        }
+      }
     }
   }
+
+  // fixed가 div를 완전히 가리지 않도록 함.
+var fixedRand = Math.floor(Math.random() * 3);
+if (
+  effects[parseInt(brickRowCount / 2) - 1][0].text == "fixed" &&
+  effects[parseInt(brickRowCount / 2)][1].text == "fixed" &&
+  effects[parseInt(brickRowCount / 2) + 1][0].text == "fixed"
+) {
+  switch (fixedRand) {
+    case 0:
+      effects[parseInt(brickRowCount / 2) - 1][0].text = "";
+      effects[parseInt(brickRowCount / 2) - 1][0].randNum = 7;
+      break;
+    case 1:
+      effects[parseInt(brickRowCount / 2)][1].text = "";
+      effects[parseInt(brickRowCount / 2)][1].randNum = 7;
+      break;
+    case 2:
+      effects[parseInt(brickRowCount / 2) + 1][0].text = "";
+      effects[parseInt(brickRowCount / 2) + 1][0].randNum = 7;
+      break;
+  }
+}
 
   //캔버스에 효과 그리기
   function drawText(){

@@ -140,6 +140,7 @@ function brickGame(){
   var effects = [];
   var effectCnt = 0;
   const effectLimit = level;
+  var fixedCount = 0;
   for (let i = 0; i < brickRowCount; i++) {
     effects[i] = []; 
     effectCnt = 0; 
@@ -169,10 +170,11 @@ function brickGame(){
       var y = j * (effectInfo.h + effectInfo.padding) + effectInfo.offsetY;
       effects[i][j] = {x, y, randNum, text , offsetX, ...effectInfo};
 
-      //fixed 6개까지만 허용
+      //fixed 3개까지만 허용
+
       if(effects[i][j].text == "fixed"){
         fixedCount++;
-        if(fixedCount>6){
+        if(fixedCount>3){
           effects[i][j].text = "";
           effects[i][j].randNum = 7;
         }

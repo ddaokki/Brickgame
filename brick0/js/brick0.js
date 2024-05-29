@@ -681,6 +681,7 @@ if (
   }
   // 게임오버 함수
   function gameOver() {
+    return;
     if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
       {
         location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);

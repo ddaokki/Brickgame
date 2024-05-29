@@ -29,4 +29,21 @@ $(document).ready(function() {
         check = false;
         audio.pause();
     });
+
+    $("#story-button").on("click",function(){
+        $(".storyslide").fadeIn();
+    });
+
+    var cnt = 1;
+    $(".storyslide").on("click", function(){
+        cnt++;
+        $("#slide").css({
+            display:"none"
+        });
+        $("#slide").attr("src", "../image/slide" + cnt + ".JPG");
+        $("#slide").fadeIn();
+        if(cnt==6){
+            $(".storyslide").fadeOut();
+        }
+    })
 });

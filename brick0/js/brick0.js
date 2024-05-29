@@ -59,10 +59,13 @@ function brickGame(){
   else if (level == 2){
     ball.size = 13;
     ball.speed = 3;
+    time = 75;
   }
   else if (level == 3){
     ball.size = 10;
     ball.speed = 4;
+    time = 90;
+    //life = 2;
   }
 
   // 패들 기본값
@@ -108,9 +111,9 @@ function brickGame(){
     opacity: 1,
     hits:-1
   };
-  const brickColor = [["#483D03","#646536","#9ABD97","#B6D7B9","#CFE0C3"],
+  const brickColor = [["#1F363D","#40798C","#70A9A1","#9EC1A3","#CFE0C3"],
                       ["#4F3130","#753742","#AA5042","#D8BD8A","#D8D78F"],
-                      ["#1F363D","#40798C","#70A9A1","#9EC1A3","#CFE0C3"]];
+                      ["#483D03","#646536","#9ABD97","#B6D7B9","#CFE0C3"]];
   //효과 기본값
   const effectInfo = {
     w: 60 + 20 * (3-level),
@@ -324,6 +327,7 @@ if (
         case 7:
           return;
         case 8:   //fixed
+          playsound(2);
           return;
         case 9:
           effectManager.effect9();
@@ -386,6 +390,7 @@ if (
       show_win(); 
       window.setTimeout(effect_win,1500);
     }
+    playsound(1);
   }
   function show_win(){
       ball.dx = 0;
@@ -444,7 +449,8 @@ if (
   }
   
   function effect_opacity() {
-    const randomBlocks = [];
+    const randomBlocks = []; 
+    var cnt = 0;
     while (randomBlocks.length < 3) {
       const randomRow = Math.floor(Math.random() * brickRowCount);
       const randomCol = Math.floor(Math.random() * brickColumnCount);
@@ -454,6 +460,8 @@ if (
       if (!randomBlocks.some(block => block.row === randomRow && block.col === randomCol) && bricks[randomRow][randomCol].visible) {
         randomBlocks.push(randomBlock);
       }
+      cnt++;
+      if(cnt == 100) break;
     }
   
     randomBlocks.forEach(block => {
@@ -542,6 +550,7 @@ if (
         }
       }
     }
+    playsound(1);
   }
 
   function effect_char(){
@@ -572,7 +581,8 @@ if (
           }
         }
       }
-      life = 0;
+      life--;
+      playsound(3);
    }
 
    function effect_char2(){
@@ -602,8 +612,8 @@ if (
         }
       }  
     }
-    
-    life = 0;
+    playsound(4);
+    life--;
    }
 
    function effect_char3(){
@@ -622,8 +632,8 @@ if (
         }
     }
     var li;
-    if(level == 1) li = 3;
-    else if(level == 2) li = 5;
+    if(level == 1) li = 5;
+    else if(level == 2) li = 7;
     else if(level == 3) li = 10;
 
     if(remainBlocks.length < li){
@@ -642,9 +652,17 @@ if (
         }
       }
     }
-    life = 0;
+    playsound(5);
+    life--;
    }
   
+   function playsound(num){
+    var audio = new Audio("../music/sound" + num + ".mp3");
+    
+
+    audio.volume = 0.4;
+    audio.play();
+   }
 
   let score = 0;
   // 점수판
@@ -749,9 +767,11 @@ if (
             if(effects[brick.i][brick.j].randNum <=7  && effects[brick.i][brick.j].randNum > 0){
               brick.visible = false;
               effects[brick.i][brick.j].visible = false;
+              playsound(1);
             }
             check_effects(brick.i,brick.j);
             increaseScore();
+            
           }
         }
       });
@@ -770,6 +790,7 @@ if (
     }
     if(time == 0){
       clearInterval(timer);
+      life = 0;
       gameOver(); //제한시간이 됐을때 게임 오버 처리
     }
   },1000);
@@ -779,7 +800,7 @@ if (
   }
   // 게임오버 함수
   function gameOver() {
-    if(life == 1){
+    if(life >= 1){
       effect_char();
       ball.x= canvas.width / 2,
       ball.y= canvas.height / 2,

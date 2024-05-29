@@ -5,6 +5,7 @@ $(document).ready(function(){
     event.preventDefault();
 }
 $('#gameover-wrap').hide();
+setTimeout(showResult,2000);
 
 });
 

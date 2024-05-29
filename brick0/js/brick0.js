@@ -274,7 +274,7 @@ if (
         effectState.timeoutId = setTimeout(() => {
           effectState.isRunning = false;
           drawInit();
-        }, 3000);
+        }, 5000);
 
         func();
       };
@@ -404,11 +404,21 @@ if (
       return;
     }
     for(let i = 0; i < brickRowCount; i++) {
-      for (let j = 0; j < brickColumnCount; j++) {
-        bricks[i][j].w += 10;
-        bricks[i][j].x += 10 * i - 50;
-        effects[i][j].x += 10 * i - 50;
+      if(level==2){
+        for (let j = 0; j < brickColumnCount; j++) {
+          bricks[i][j].w += 10;
+          bricks[i][j].x += 10 * i - 20;
+          effects[i][j].x += 10 * i - 20;
+        }
       }
+      else{
+        for (let j = 0; j < brickColumnCount; j++) {
+          bricks[i][j].w += 10;
+          bricks[i][j].x += 10 * i - 40;
+          effects[i][j].x += 10 * i - 40;
+        }
+      }
+      
     }
     drawText();
     drawBricks();
@@ -627,7 +637,7 @@ if (
             if (collideFromLeft || collideFromRight) {
               ball.dx *= -1;
             }
-            if((effects[brick.i][brick.j].randNum < 6  && effects[brick.i][brick.j].randNum > 0) || effects[brick.i][brick.j].randNum==7){
+            if(effects[brick.i][brick.j].randNum <=7  && effects[brick.i][brick.j].randNum > 0){
               brick.visible = false;
               effects[brick.i][brick.j].visible = false;
             }

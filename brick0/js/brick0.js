@@ -404,7 +404,7 @@ if (
     draw(); 
   }
   function effect_win() {
-    alert("해냈다! 모든 블럭을 부쉈어!");
+    alert("해냈다! 모든 벽돌을 부쉈어!");
     score = 100;
     drawScore();
     location.replace("../html/gameSuccess.html");
@@ -565,6 +565,7 @@ if (
         effect_char3();
         break;
     }
+    $('#last').fadeIn();
   }
   
   function effect_char1(){
@@ -675,7 +676,9 @@ if (
     context.beginPath();
     context.lineWidth = 2; 
     context.strokeStyle = '#000000'; 
-    context.fillStyle = '#ffffff'; 
+    if(level == 1) context.fillStyle = '#ffffff';
+    if(level == 2) context.fillStyle = '#F2D398';
+    if(level == 3) context.fillStyle = '#EE8473'; 
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.stroke(); 
   }
@@ -782,10 +785,12 @@ if (
       gameOver();
     }
   }
+  var c = 0;
   var timer = setInterval(function(){
     time--;
+    c++
     $('#timelimit').text("남은 시간: " + time);
-    if(time==45){
+    if(c==15){
       showHint();
     }
     if(time == 0){
@@ -811,7 +816,7 @@ if (
       ball.y = canvas.height / 2;
       ball.dx = 0;
       ball.dy = 0;
-      if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
+      if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n"))
         {
           location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
         }

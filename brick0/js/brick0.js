@@ -26,7 +26,7 @@ function brickGame(){
 
   
   $('#char').attr("src", "../image/char" + character + ".png");
-  $('#gameInfo').fadeIn();
+  $('#canvas-container').fadeIn();
 
   var audio = new Audio("../music/bgm" + music + ".mp3");
   audio.volume = 0.2;
@@ -538,7 +538,8 @@ if (
     context.beginPath();
     context.lineWidth = 2; 
     context.strokeStyle = '#000000'; 
-    context.rect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#ffffff'; 
+    context.fillRect(0, 0, canvas.width, canvas.height);
     context.stroke(); 
   }
 
@@ -694,11 +695,11 @@ if (
   // draw
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    drawBorder();
     drawBall();
     drawPaddle();
     drawScore();
     drawBricks();
-    drawBorder();
     drawText();
   }
 

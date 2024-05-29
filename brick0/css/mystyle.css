@@ -369,11 +369,10 @@ tr:nth-child(odd) {
 
 #gameInfo{
     position: absolute;
-    display: none;
     box-sizing: border-box;
     border:2px solid;
     right: 170px;
-    top: 375px;
+    top: 175px;
     width: 350px;
     height: 450px;
     padding-left: 15px;
@@ -388,3 +387,21 @@ tr:nth-child(odd) {
     width: 35%;
 }
 
+#canvas-container{
+    background-color: rgba(0,0,0,0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+
+    z-index: 100;
+}
+
+#canvas-container canvas{
+    position: absolute;
+    left: 50%;
+    margin-left: -375px;
+    top: 150px;
+}

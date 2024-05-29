@@ -35,36 +35,57 @@
   <div class="storyslide">
       <img id="slide" src="../image/slide1.JPG" alt="">
   </div>
-  <div class="setting">
-    캐릭터, 벽돌 색, 배경음악을 선택해주세요
-    <img src="../image/x.png" alt="" width="40px" height="40px" id="x_img">
-    <div class="setting-wrap">
-      <label class="character" for="ch1"><img src="../image/char1.png"></label>
-      <label class="character" for="ch2"><img src="../image/char2.png"></label>
-      <label class="character" for="ch3"><img src="../image/char3.png"></label>
-      <input type="radio" name="character" value="ch1" id="ch1" checked/>
-      <input type="radio" name="character" value="ch2" id="ch2"/>
-      <input type="radio" name="character" value="ch3" id="ch3"/>
-    </div>
-    <div class="setting-wrap">
-      <label class="brickColor" for="c1"><img src="../image/brick1.png"></label>
-      <label class="brickColor" for="c2"><img src="../image/brick2.png"></label>
-      <label class="brickColor" for="c3"><img src="../image/brick3.png"></label>
-      <input type="radio" name="color" value="c1" id="c1" checked/>
-      <input type="radio" name="color" value="c2" id="c2"/>
-      <input type="radio" name="color" value="c3" id="c3"/>
-    </div>
-    <div class="setting-wrap">
-      <label class="music" for="m1"><img src="../image/music_image.png"></label>
-      <label class="music" for="m2"><img src="../image/music_image.png"></label>
-      <label class="music" for="m3"><img src="../image/music_image.png"></label>
-      <input type="radio" name="bgm" value="m1" id="m1" checked/>
-      <input type="radio" name="bgm" value="m2" id="m2"/>
-      <input type="radio" name="bgm" value="m3" id="m3"/>
-    </div>
-    <div class="setting-wrap">
-      <button>선택 완료</button>      
-    </div>
+  <div class="wrap">
+    <div class="setting">
+      캐릭터, 벽돌 색, 배경음악을 선택해주세요
+      <img src="../image/x.png" alt="" width="40px" height="40px" id="x_img">
+      <div class="setting-wrap">
+        <label class="character" for="ch1"><img src="../image/char1.png"></label>
+        <label class="character" for="ch2"><img src="../image/char2.png"></label>
+        <label class="character" for="ch3"><img src="../image/char3.png"></label>
+        <input type="radio" name="character" value="ch1" id="ch1" checked/>
+        <input type="radio" name="character" value="ch2" id="ch2"/>
+        <input type="radio" name="character" value="ch3" id="ch3"/>
+      </div>
+      <div class="setting-wrap">
+        <label class="brickColor" for="c1"><img src="../image/brick1.png"></label>
+        <label class="brickColor" for="c2"><img src="../image/brick2.png"></label>
+        <label class="brickColor" for="c3"><img src="../image/brick3.png"></label>
+        <input type="radio" name="color" value="c1" id="c1" checked/>
+        <input type="radio" name="color" value="c2" id="c2"/>
+        <input type="radio" name="color" value="c3" id="c3"/>
+      </div>
+      <div class="setting-wrap">
+        <label class="music" for="m1"><img src="../image/music_image.png"></label>
+        <label class="music" for="m2"><img src="../image/music_image.png"></label>
+        <label class="music" for="m3"><img src="../image/music_image.png"></label>
+        <input type="radio" name="bgm" value="m1" id="m1" checked/>
+        <input type="radio" name="bgm" value="m2" id="m2"/>
+        <input type="radio" name="bgm" value="m3" id="m3"/>
+      </div>
+      <div class="setting-wrap">
+        <button>선택 완료</button>      
+      </div>
+      <div class="char-explain">
+        캐릭터별로 능력이 있습니다! <br> 
+        <span style="font-size: 13px; margin-top: 14px; display: inline-block;">능력은 처음으로 게임에서 패배할때 발동됩니다</span>
+        <div class="char">
+          <img src="../image/char1.png">
+          <br> 합리적인 캐릭터입니다. <br><br>
+          능력이 발동되면 DIV가 포함된 행과 열을 제거합니다!
+        </div>
+        <div class="char">
+          <img src="../image/char2.png">
+          <br>시원시원한 캐릭터입니다! <br><br>
+          능력이 발동되면 남아있는 벽돌 중 맨 밑줄 전체를 쓸어버립니다!
+        </div>
+        <div class="char">
+          <img src="../image/char3.png">
+          <br>종잡을 수 없는 INTP형 캐릭터입니다. <br><br>
+          능력이 발동되면 벽돌 (3/5/10)개를 랜덤으로 제거합니다.
+        </div>
+      </div>
+  </div>
   </div>
 </div>
 </body>

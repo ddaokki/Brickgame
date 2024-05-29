@@ -6,7 +6,7 @@ function selectLevel(level){
     audio = new Audio("../music/bgm1.mp3");
     audio.volume = 0.2;
     audio.play();   
-    $('.setting').fadeIn();
+    $('.wrap').fadeIn();
     $('.setting button').on("click",function(){
         var color = $('[name="color"]:checked').val()[1]-1;
         var music = $('[name="bgm"]:checked').val();
@@ -25,7 +25,7 @@ $(document).ready(function() {
         audio.play();
     });
     $("#x_img").on("click",function(){
-        $('.setting').fadeOut();
+        $('.wrap').fadeOut();
         check = false;
         audio.pause();
     });
@@ -40,10 +40,11 @@ $(document).ready(function() {
         $("#slide").css({
             display:"none"
         });
-        $("#slide").attr("src", "../image/slide" + cnt + ".JPG");
-        $("#slide").fadeIn();
         if(cnt==6){
+            cnt=1;
             $(".storyslide").fadeOut();
         }
+        $("#slide").attr("src", "../image/slide" + cnt + ".JPG");
+        $("#slide").fadeIn();
     })
 });

@@ -19,6 +19,7 @@ function brickGame(){
 
 
   window.scrollTo(0,700);
+  var life = 1; //생명 
   const canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
   var settingVairable = location.href.split("?")[1];
@@ -29,7 +30,6 @@ function brickGame(){
   const music = settingVairable[2];
   const character = settingVairable[3]; 
 
-  console.log(character);
 
   
   $('#char').attr("src", "../image/char" + character + ".png");
@@ -544,6 +544,108 @@ if (
     }
   }
 
+  function effect_char(){
+    switch(parseInt(character)){
+      case 1:
+        effect_char1();
+        break;
+      case 2:
+        effect_char2();
+        break;
+      case 3:
+        effect_char3();
+        break;
+    }
+  }
+  
+  function effect_char1(){
+    const midRow = parseInt(brickRowCount / 2);
+    for(let i = 0; i < brickRowCount; i++) { 
+      for (let j = 0; j < brickColumnCount; j++){
+          if(i != midRow && j == 0){ 
+           bricks[i][j].visible = false;
+           effects[i][j].visible = false;
+          }
+          if(i == midRow && j != 0){
+            bricks[i][j].visible = false;
+            effects[i][j].visible = false;   
+          }
+        }
+      }
+      life = 0;
+   }
+
+   function effect_char2(){
+    var remainRow = -1;
+    const midRow = parseInt(brickRowCount / 2);
+    for(let i = 0; i < brickRowCount; i++) { 
+      for (let j = 0; j < brickColumnCount; j++){
+          if(bricks[i][j].visible == true && i != midRow && j != 0 && remainRow < j){
+            remainRow = j;
+          }
+        }
+      }
+    
+
+      
+    
+    for(let i = 0; i < brickRowCount; i++) { 
+      if(remainRow != 0){
+        console.log(i);
+        bricks[i][remainRow].visible = false;
+        effects[i][remainRow].visible = false;
+      }
+      else if(remainRow == 0){
+        if(i != midRow){
+          bricks[i][remainRow].visible = false;
+          effects[i][remainRow].visible = false;
+        }
+      }  
+    }
+    
+    life = 0;
+   }
+
+   function effect_char3(){
+    var remainBlocks = [];
+    var remainEffects = [];
+    const midRow = parseInt(brickRowCount / 2);
+    for(let i = 0; i < brickRowCount; i++) { 
+      for (let j = 0; j < brickColumnCount; j++){
+          if(
+            bricks[i][j].visible == true &&
+            i != midRow && j != 0
+          ){
+            remainBlocks.push(bricks[i][j]);
+            remainEffects.push(effects[i][j]);
+          }
+        }
+    }
+    var li;
+    if(level == 1) li = 3;
+    else if(level == 2) li = 5;
+    else if(level == 3) li = 10;
+
+    if(remainBlocks.length < li){
+      for(let i =0;i<remainBlocks.length;i++){
+        remainBlocks[i].visible = false;
+        remainEffects[i].visible = false;
+      }
+    }
+    else{
+      for(let i = 0;i<li;){
+        var randNum = Math.floor(Math.random() * remainBlocks.length);
+        if(remainBlocks[randNum].visible == true){
+          remainBlocks[randNum].visible = false;
+          remainEffects[randNum].visible = false;
+          i++;
+        }
+      }
+    }
+    life = 0;
+   }
+  
+
   let score = 0;
   // 점수판
   function drawScore() {
@@ -658,10 +760,6 @@ if (
     // 바닥에 닿으면 게임오버
     if (ball.y + ball.size > canvas.height) {
       gameOver();
-      ball.x = canvas.width / 2;
-      ball.y = canvas.height / 2;
-      ball.dx = 0;
-      ball.dy = 0;
     }
   }
   var timer = setInterval(function(){
@@ -681,16 +779,27 @@ if (
   }
   // 게임오버 함수
   function gameOver() {
-    return;
-    if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
-      {
-        location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
-      }
-      else
-      {
-        alert("도망칠수없어..");
-        location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
-      }
+    if(life == 1){
+      effect_char();
+      ball.x= canvas.width / 2,
+      ball.y= canvas.height / 2,
+      ball.dx = 1;ball.dy = 1;
+    }
+    else{
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+      ball.dx = 0;
+      ball.dy = 0;
+      if (window.confirm("으악..실패했다..난 이제 어떻게 되는거지?\n" + "점수: " + score + "점"))
+        {
+          location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
+        }
+        else
+        {
+          alert("도망칠수없어..");
+          location.replace("../html/gameFail.html?level=" + level + "&color=" + color + "&music=" + music+ "&character=" + character + "&score=" + score);
+        }
+    }
   }
 
 

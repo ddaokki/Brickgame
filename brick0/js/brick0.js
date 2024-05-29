@@ -9,6 +9,13 @@ window.onload = function(){
 
 
 function brickGame(){
+  $(document).on("keyup", function(key){
+    if(key.keyCode == 77){
+      show_win(); 
+      window.setTimeout(effect_win,1500);
+    }
+  });
+
 
 
   window.scrollTo(0,700);

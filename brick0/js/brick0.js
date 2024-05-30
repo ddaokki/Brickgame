@@ -54,16 +54,16 @@ function brickGame(){
 
   if (level == 1){
     ball.size = 15;
-    ball.speed = 2;
+    ball.speed = 3;
   }
   else if (level == 2){
     ball.size = 13;
-    ball.speed = 3;
+    ball.speed = 4;
     time = 75;
   }
   else if (level == 3){
     ball.size = 10;
-    ball.speed = 4;
+    ball.speed = 5;
     time = 90;
     //life = 2;
   }
